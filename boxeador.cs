@@ -13,4 +13,16 @@ class Boxeador
         PotenciaGolpes = potenciaGolpes;
         VelocidadPiernas = velocidadPiernas;
     }
+    public Boxeador()
+    {
+        
+    }
+    public double obtenerSkill()
+    {
+        Random num = new Random();
+        double numero = num.Next(1, 10);
+        double skill = 0;
+        skill = numero + VelocidadPiernas/10 * 6 + PotenciaGolpes /10 * 6;
+        return skill;
+    }
 }

@@ -1,4 +1,6 @@
 ﻿int numero;
+Boxeador boxeador1 = new Boxeador();
+Boxeador boxeador2 = new Boxeador();
 do
 {
     Console.WriteLine("1.Cargar Datos Boxeador 1");
@@ -9,11 +11,14 @@ do
     switch(numero)
     {
         case 1:
-        Boxeador boxeador1 = cargarDatosBoxeador();
-        break;
+            boxeador1 = cargarDatosBoxeador();
+            break;
         case 2:
-        Boxeador boxeador2 = cargarDatosBoxeador();
-        break;
+            boxeador2 = cargarDatosBoxeador();
+            break;
+        case 3:
+            Pelear();
+            break;
     }
 } while (numero != 4);
 int ingresarNumero(string msj)
@@ -66,4 +71,48 @@ double ingresarPeso(string msj)
     Console.WriteLine(msj);
     peso = double.Parse(Console.ReadLine());
     return peso;
+}
+void Pelear()
+{
+    if (boxeador1.Nombre == "" || boxeador2.Nombre == "")
+    {
+        Console.WriteLine("No existe el boxeador, tenes que volver a cargarlo");
+    }
+    else
+    {
+        calcularGanador();
+    }
+}
+void calcularGanador()
+{
+    if(boxeador1.obtenerSkill() > boxeador2.obtenerSkill())
+    {
+        if(boxeador1.obtenerSkill() - boxeador2.obtenerSkill() >= 30)
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador1.Nombre + " por KO");
+        }
+        else if(boxeador1.obtenerSkill() - boxeador2.obtenerSkill() >= 10 && boxeador1.obtenerSkill() - boxeador2.obtenerSkill() < 30)
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador1.Nombre + " por puntos en fallo unanime");
+        }
+        else
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador1.Nombre + " por puntos en fallo dividido");
+        }
+    }
+    else
+    {
+        if(boxeador2.obtenerSkill() - boxeador1.obtenerSkill() >= 30)
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador2.Nombre + " por KO");
+        }
+        else if(boxeador2.obtenerSkill() - boxeador1.obtenerSkill() >= 10 && boxeador2.obtenerSkill() - boxeador1.obtenerSkill() < 30)
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador2.Nombre + " por puntos en fallo unanime");
+        }
+        else
+        {
+            Console.WriteLine("El ganador del combate es " + boxeador2.Nombre + " por puntos en fallo dividido");
+        }
+    }
 }
